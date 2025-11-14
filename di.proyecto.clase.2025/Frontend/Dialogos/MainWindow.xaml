@@ -1,0 +1,87 @@
+﻿<mah:MetroWindow x:Class="di.proyecto.clase._2025.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:di.proyecto.clase._2025"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        TitleBarHeight="40"
+        Title="MainWindow" Height="450" Width="800">
+
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button x:Name="btnLogout" Click="btnLogout_Click">
+                <mat:PackIcon Kind="Account" />
+            </Button>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+
+    <mah:MetroWindow.LeftWindowCommands>
+        <mah:WindowCommands>
+            <Image Source="/Iconos/matisse.png" />
+        </mah:WindowCommands>
+    </mah:MetroWindow.LeftWindowCommands>
+
+    <Grid>
+        <mah:HamburgerMenu
+            x:Name="hamMenuPrincipal"
+            Grid.ColumnSpan="2"
+            DisplayMode="CompactInline"
+            Foreground="White"
+            ItemTemplate="{StaticResource MenuItemTemplateImage}"
+            OptionsItemTemplate="{StaticResource MenuItemTemplateIcon}"
+            ItemClick="hamMenuPrincipal_ItemClick">
+
+            <!-- Poner tags a cada hamburger item-->
+            <mah:HamburgerMenu.ItemsSource>
+                <mah:HamburgerMenuItemCollection>
+                    <mah:HamburgerMenuImageItem Label="Préstamos" ToolTip="Préstamos">
+                        <mah:HamburgerMenuImageItem.Thumbnail>
+                            <BitmapImage UriSource="/Recursos/Iconos/prestamos.png" />
+                        </mah:HamburgerMenuImageItem.Thumbnail>
+                    </mah:HamburgerMenuImageItem>
+
+                    <mah:HamburgerMenuImageItem Label="Búsquedas" ToolTip="Búsquedas">
+                        <mah:HamburgerMenuImageItem.Thumbnail>
+                            <BitmapImage UriSource="/Recursos/Iconos/busqueda.png" />
+                        </mah:HamburgerMenuImageItem.Thumbnail>
+                    </mah:HamburgerMenuImageItem>
+
+                    <mah:HamburgerMenuImageItem Label="Artículos" ToolTip="Artículos" Tag="Articulos">
+                        <mah:HamburgerMenuImageItem.Thumbnail>
+                            <BitmapImage UriSource="/Recursos/Iconos/articulo.png" />
+                        </mah:HamburgerMenuImageItem.Thumbnail>
+                    </mah:HamburgerMenuImageItem>
+
+                    <mah:HamburgerMenuImageItem Label="Administración" ToolTip="Administración">
+                        <mah:HamburgerMenuImageItem.Thumbnail>
+                            <BitmapImage UriSource="/Recursos/Iconos/administracion.png" />
+                        </mah:HamburgerMenuImageItem.Thumbnail>
+                    </mah:HamburgerMenuImageItem>
+
+                    <mah:HamburgerMenuImageItem Label="Inventario" ToolTip="Inventario">
+                        <mah:HamburgerMenuImageItem.Thumbnail>
+                            <BitmapImage UriSource="/Recursos/Iconos/inventario.png" />
+                        </mah:HamburgerMenuImageItem.Thumbnail>
+                    </mah:HamburgerMenuImageItem>
+
+                    <mah:HamburgerMenuImageItem Label="Informacion" ToolTip="Informacion">
+                        <mah:HamburgerMenuImageItem.Thumbnail>
+                            <BitmapImage UriSource="/Recursos/Iconos/informacion.png" />
+                        </mah:HamburgerMenuImageItem.Thumbnail>
+                    </mah:HamburgerMenuImageItem>
+
+                </mah:HamburgerMenuItemCollection>
+            </mah:HamburgerMenu.ItemsSource>
+            <!--  Sección de opciones  -->
+            <mah:HamburgerMenu.OptionsItemsSource>
+                <mah:HamburgerMenuItemCollection>
+                    <mah:HamburgerMenuIconItem Icon="{mat:PackIcon Kind=Help}" Label="Ayuda" />
+                </mah:HamburgerMenuItemCollection>
+            </mah:HamburgerMenu.OptionsItemsSource>
+        </mah:HamburgerMenu>
+    </Grid>
+</mah:MetroWindow>

@@ -1,0 +1,57 @@
+﻿<Window x:Class="di.proyecto.clase._2025.Frontend.Dialogos.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
+        mc:Ignorable="d"
+        Title="Login" Height="450" Width="800">
+    <Grid>
+
+        <Grid Width="770" Height="420" Background="#2B2A4C" >
+            <StackPanel Margin="30">
+                <TextBlock Text="Bienvenidos !" FontSize="30" Foreground="White" FontWeight="Bold"/>
+                <TextBlock Text="INVENTARIO MATISSE" FontSize="17" Foreground="White" Margin="0,15,0,180"/>
+                <Image Source="/Recursos/Iconos/matisse.png" Width="70" HorizontalAlignment="Left"/>
+                <TextBlock Text="IES HENRI MATISSE" FontSize="12" Foreground="White"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Background="White" Width="300" HorizontalAlignment="Right" Margin="0,0,50,0">
+            <TextBlock Text="LOGIN" FontSize="25" Foreground="#2B2A4C" HorizontalAlignment="Center" Margin="0,30,0,0"/>
+            <TextBox x:Name="txtUsuario" 
+         Margin="30,30,30,20"
+         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+         mat:HintAssist.Hint="Nombre de Usuario"/>
+
+            <PasswordBox x:Name="passClave" 
+          Margin="30,10,30,30"
+          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+          mat:HintAssist.Hint="Clave de Acceso"/>
+
+            <Button 
+          x:Name="btnLogin"
+          Click="btnLogin_Click"
+          Content="LOGIN"
+          Margin="30,20,30,0"
+          Style="{StaticResource MaterialDesignRaisedButton}"
+          Background="#B31312"
+          Foreground="White"
+                IsDefault="true"/>
+
+            <Button 
+          Content="¿TIENES CUENTA?"
+          Margin="30,40,30,0"
+          Style="{StaticResource MaterialDesignRaisedButton}"
+          Background="White"
+          Foreground="#2B2A4C"/>
+
+            <TextBlock Margin="0,40,0,0" Foreground="#2B2A4C" Text="¿Olvidaste la Contraseña?" HorizontalAlignment="Center" />
+
+        </StackPanel>
+
+    </Grid>
+</Window>
