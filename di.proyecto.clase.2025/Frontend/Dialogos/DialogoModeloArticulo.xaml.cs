@@ -13,7 +13,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
     {
         private DiinventarioexamenContext _context;
         private ILogger<GenericRepository<Modeloarticulo>> _logger; 
-        private ModeloArticuloRespository _modeloArticuloRepository;
+        private ModeloArticuloRepository _modeloArticuloRepository;
         private TipoArticuloRepository _tipoArticuloRepository;
         public DialogoModeloArticulo()
         {
@@ -27,7 +27,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
             {
                 builder.AddConsole();
             }).CreateLogger<GenericRepository<Modeloarticulo>>();
-            _modeloArticuloRepository = new ModeloArticuloRespository(_context, _logger);
+            _modeloArticuloRepository = new ModeloArticuloRepository(_context, _logger);
             _tipoArticuloRepository = new TipoArticuloRepository(_context, null);
 
             //Cargamos los tipos de artículo en el ComboBox
