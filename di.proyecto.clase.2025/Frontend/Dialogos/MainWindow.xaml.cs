@@ -18,16 +18,19 @@ namespace di.proyecto.clase._2025
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        public MainWindow()
+        //private Login _ventanaLogin;
+        private UCArticulos _ucArticulos;
+        public MainWindow(/*Login ventanaLogin*/ UCArticulos ucArticulos)
         {
             InitializeComponent();
+            _ucArticulos = ucArticulos;
+            //_ventanaLogin = ventanaLogin;
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
-            Login ventanaLogin = new Login();
-            ventanaLogin.Show();
-            this.Close();
+            //_Login.Show();
+            //this.Hide();
         }
 
         private void hamMenuPrincipal_ItemClick(object sender, ItemClickEventArgs args)
@@ -47,7 +50,7 @@ namespace di.proyecto.clase._2025
             switch (etiqueta)
             {
                 case "Articulos":
-                    hamMenuPrincipal.Content = new UCArticulos();
+                    hamMenuPrincipal.Content = _ucArticulos;
                     break;
                 default:
                     break;

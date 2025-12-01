@@ -11,6 +11,7 @@
         <ToolBar DockPanel.Dock="Top">
             <Button x:Name="btnAgregarModelo" ToolTip="Agregar ModeloArticulo" Click="btnAgregarModelo_Click">
                 <mat:PackIcon Kind="PlusBoxMultipleOutline" />
+                
             </Button>
         </ToolBar>
     </DockPanel>

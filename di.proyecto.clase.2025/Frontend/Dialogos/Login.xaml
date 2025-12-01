@@ -9,7 +9,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800" Loaded="ventana_Loaded">
+        Title="Login" Height="450" Width="800" >
     <Grid>
 
         <Grid Width="770" Height="420" Background="#2B2A4C" >

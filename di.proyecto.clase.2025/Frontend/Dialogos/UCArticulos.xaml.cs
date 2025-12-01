@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,15 +21,19 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
     /// </summary>
     public partial class UCArticulos : UserControl
     {
-        public UCArticulos()
+        private DialogoModeloArticulo _dialogoModeloArticulo;
+        private readonly IServiceProvider _serviceProvider;
+        public UCArticulos(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
         }
 
         private void btnAgregarModelo_Click(object sender, RoutedEventArgs e)
         {
-            DialogoModeloArticulo dialogo = new DialogoModeloArticulo();
-            dialogo.ShowDialog();
+            _dialogoModeloArticulo = _serviceProvider.GetRequiredService<DialogoModeloArticulo>();
+            _dialogoModeloArticulo.ShowDialog();
+            
         }
     }
 }

@@ -12,27 +12,20 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
     public partial class DialogoModeloArticulo : MetroWindow
     {
         private DiinventarioexamenContext _context;
-        private ILogger<GenericRepository<Modeloarticulo>> _logger; 
         private ModeloArticuloRepository _modeloArticuloRepository;
         private TipoArticuloRepository _tipoArticuloRepository;
-        public DialogoModeloArticulo()
+
+        public DialogoModeloArticulo(DiinventarioexamenContext context, TipoArticuloRepository tipoArticuloRepository)
         {
             InitializeComponent();
+            _context = context;
+            _tipoArticuloRepository = tipoArticuloRepository;
         }
 
         private async void diagModeloArticulo_Loaded(object sender, RoutedEventArgs e)
         {
-            _context = new DiinventarioexamenContext();
-            _logger = LoggerFactory.Create(builder =>
-            {
-                builder.AddConsole();
-            }).CreateLogger<GenericRepository<Modeloarticulo>>();
-            _modeloArticuloRepository = new ModeloArticuloRepository(_context, _logger);
-            _tipoArticuloRepository = new TipoArticuloRepository(_context, null);
-
             //Cargamos los tipos de artículo en el ComboBox
-            List<Tipoarticulo> tipos = await _tipoArticuloRepository.GetAllAsync();
-            cmbTipoArticulo.ItemsSource = tipos;
+            cmbTipoArticulo.ItemsSource = await _tipoArticuloRepository.GetAllAsync();
         }
 
         private async void btnGuardarModeloArticulo_Click(object sender, RoutedEventArgs e)
@@ -43,7 +36,6 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
             try
             {
                 await _modeloArticuloRepository.AddAsync(modeloarticulo);
-                _context.SaveChanges();
                 DialogResult = true;
             }
             catch (Exception ex)

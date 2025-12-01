@@ -23,23 +23,14 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
     /// </summary>
     public partial class Login : Window
     {
-        private DiinventarioexamenContext _context;
         private UsuarioRepository _usuarioRepo;
-        private ILogger<GenericRepository<Usuario>> _logger;
+        private MainWindow _mainWindow;
 
-        public Login()
+        public Login(UsuarioRepository usuarioRepo, MainWindow mainWindow)
         {
             InitializeComponent();
-        }
-
-        private void ventana_Loaded(object sender, RoutedEventArgs e)
-        {
-            _context = new DiinventarioexamenContext();
-            _logger = LoggerFactory.Create(builder =>
-            {
-                builder.AddConsole();
-            }).CreateLogger<GenericRepository<Usuario>>();
-            _usuarioRepo = new UsuarioRepository(_context, _logger);
+            _mainWindow = mainWindow;
+            _usuarioRepo = usuarioRepo;
         }
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -51,8 +42,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
                 if (loginCorrecto)
                 {
                     Usuario usuLogin = await _usuarioRepo.GetByUsernameAsync(txtUsuario.Text);
-                    MainWindow ventanaPrincipal = new MainWindow();
-                    ventanaPrincipal.Show();
+                    _mainWindow.Show();
                     this.Close();
                 } else {
                     MessageBox.Show("Usuario o clave incorrectos.", "Error de autenticación", 
