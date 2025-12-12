@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace di.proyecto.clase._2025.Backend.Servicios
 {
-    public interface ITipoArticuloRepository : IGenericRepository<TipoArticuloRepository>
+    public interface ITipoArticuloRepository : IGenericRepository<ModeloArticuloRepository>
     {
     }
 }

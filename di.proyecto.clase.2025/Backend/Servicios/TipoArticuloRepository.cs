@@ -10,10 +10,11 @@ namespace di.proyecto.clase._2025.Backend.Servicios
 {
     public class TipoArticuloRepository : GenericRepository<Tipoarticulo>
     {
-        public TipoArticuloRepository(DiinventarioexamenContext context, ILogger<GenericRepository<Tipoarticulo>> logger)
-            : base(context, logger)
-        {
-        }
 
+        public TipoArticuloRepository(DiinventarioexamenContext context, ILogger<GenericRepository<Tipoarticulo>> logger)
+        : base(context, logger)
+        {
+
+        }
     }
 }
