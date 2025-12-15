@@ -21,6 +21,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
     /// </summary>
     public partial class UCArticulos : UserControl
     {
+        private DialogoArticulo _dialogoArticulo;
         private DialogoModeloArticulo _dialogoModeloArticulo;
         private readonly IServiceProvider _serviceProvider;
         public UCArticulos(IServiceProvider serviceProvider)
@@ -33,6 +34,12 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         {
             _dialogoModeloArticulo = _serviceProvider.GetRequiredService<DialogoModeloArticulo>();
             _dialogoModeloArticulo.ShowDialog();
+            
+        }
+        private void btnAgregarArticulo_Click(object sender, RoutedEventArgs e)
+        {
+            _dialogoArticulo = _serviceProvider.GetRequiredService<DialogoArticulo>();
+            _dialogoArticulo.ShowDialog();
             
         }
     }

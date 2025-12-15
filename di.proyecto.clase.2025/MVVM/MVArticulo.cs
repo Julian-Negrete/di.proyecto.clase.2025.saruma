@@ -21,33 +21,62 @@ namespace di.proyecto.clase._2025.MVVM
         /// Está vinculado a la vista para mostrar y editar los datos del artículo
         /// </summary>
         private Modeloarticulo _modeloArticulo;
+        private Articulo _Articulo;
         /// <summary>
         /// Repositorio para gestionar las operaciones de datos relacionadas con los modelos de artículo
         /// </summary>
         private ModeloArticuloRepository _modeloArticuloRepository;
+        private ArticuloRepository _articuloRepository;
         /// <summary>
         /// Repositorio para gestionar las operaciones de datos relacionadas con los tipos de artículo
         /// </summary>
         private TipoArticuloRepository _tipoArticuloRepository;
+        private UsuarioRepository _usuarioRepository;
+        private DepartamentoRepository _departamentoRepository;
+        private EspacioRepository _espacioRepository;
         /// <summary>
         /// lista de tipos de artículos disponibles
         /// </summary>
         private List<Tipoarticulo> _listaTipoArticulos;
+        private List<Usuario> _listaUsuarios;
+        private List<Departamento> _listaDepartamentos;
+        private List<Espacio> _listaEspacios;
+        private List<Modeloarticulo> _listaModelosArticulos;
         #endregion
         #region Getters y Setters
         public List<Tipoarticulo> listaTiposArticulos => _listaTipoArticulos;
+        public List<Usuario> listaUsuarios => _listaUsuarios;
+        public List<Departamento> listaDepartamentos => _listaDepartamentos;
+        public List<Espacio> listaEspacios => _listaEspacios;
+
+        public List<Modeloarticulo> listaModelosArticulos => _listaModelosArticulos;
+
         public Modeloarticulo modeloArticulo
         {
             get => _modeloArticulo;
             set => SetProperty(ref _modeloArticulo, value);
         }
+        public Articulo articulo
+
+        {
+            get => _Articulo;
+            set => SetProperty(ref _Articulo, value);
+        }
         #endregion
         // Aquí puedes añadir propiedades y métodos específicos para el ViewModel de Artículo
-        public MVArticulo(ModeloArticuloRepository modeloArticuloRepository, TipoArticuloRepository tipoArticuloRepository)
+        public MVArticulo(ModeloArticuloRepository modeloArticuloRepository, TipoArticuloRepository tipoArticuloRepository, ArticuloRepository articuloRepository, UsuarioRepository usuarioRepository, DepartamentoRepository departamentoRepository, EspacioRepository espacioRepository)
         {
             _modeloArticuloRepository = modeloArticuloRepository;
             _tipoArticuloRepository = tipoArticuloRepository;
             _modeloArticulo = new Modeloarticulo();
+
+
+            _articuloRepository = articuloRepository;
+            _usuarioRepository = usuarioRepository;
+            _departamentoRepository = departamentoRepository;
+            _espacioRepository = espacioRepository;
+            _Articulo = new Articulo();
+
         }
 
         public async Task Inicializa()
@@ -55,6 +84,10 @@ namespace di.proyecto.clase._2025.MVVM
             try
             {
                 _listaTipoArticulos = await GetAllAsync<Tipoarticulo>(_tipoArticuloRepository);
+                _listaDepartamentos = await GetAllAsync<Departamento>(_departamentoRepository);
+                _listaUsuarios = await GetAllAsync<Usuario>(_usuarioRepository);
+                _listaEspacios = await GetAllAsync<Espacio>(_espacioRepository);
+                _listaModelosArticulos = await GetAllAsync<Modeloarticulo>(_modeloArticuloRepository);
             }
             catch (Exception ex)
             {
@@ -77,6 +110,30 @@ namespace di.proyecto.clase._2025.MVVM
                 {
                     // Actualizar modelo de artículo existente
                     await _modeloArticuloRepository.UpdateAsync(modeloArticulo);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Capturamos la excepción y la registramos en el log
+                correcto = false;
+            }
+            return correcto;
+        }
+        public async Task<bool> GuardarArticuloAsync()
+        {
+            bool correcto = true;
+            try
+            {
+                if (articulo.Idarticulo == 0)
+                {
+                    // Nuevo modelo de artículo
+                    articulo.Idarticulo = 6000;
+                    await _articuloRepository.AddAsync(articulo);
+                }
+                else
+                {
+                    // Actualizar modelo de artículo existente
+                    await _articuloRepository.UpdateAsync(articulo);
                 }
             }
             catch (Exception ex)

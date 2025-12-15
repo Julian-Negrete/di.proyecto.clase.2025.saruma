@@ -53,14 +53,16 @@ namespace di.proyecto.clase._2025
             services.AddScoped<IGenericRepository<Modeloarticulo>, ModeloArticuloRepository>();
             services.AddScoped<IGenericRepository<Articulo>, ArticuloRepository>();
             services.AddScoped<IGenericRepository<Usuario>, UsuarioRepository>();
+            services.AddScoped<IGenericRepository<Departamento>, DepartamentoRepository>();
+            services.AddScoped<IGenericRepository<Espacio>, EspacioRepository>();
             // Registramos los servicios específicos
             services.AddScoped<UsuarioRepository>();
             services.AddScoped<ArticuloRepository>();
             services.AddScoped<ModeloArticuloRepository>();
             services.AddScoped<TipoArticuloRepository>();
-            services.AddScoped<GenericRepository<Departamento>>();
-            services.AddScoped<GenericRepository<Espacio>>();
-             //Registramos las interfaces de usuario
+            services.AddScoped<DepartamentoRepository>();
+            services.AddScoped<EspacioRepository>();
+            //Registramos las interfaces de usuario
             services.AddScoped<Login>();
             services.AddTransient<UCArticulos>();
             services.AddTransient<DialogoModeloArticulo>();

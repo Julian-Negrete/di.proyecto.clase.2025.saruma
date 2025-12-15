@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace di.proyecto.clase._2025.Backend.Servicios
 {
-    public class ArticuloRepository : GenericRepository<Articulo>
+    public class EspacioRepository : GenericRepository<Espacio>
     {
-        public ArticuloRepository(DiinventarioexamenContext context, ILogger<GenericRepository<Articulo>> logger)
+
+        public EspacioRepository(DiinventarioexamenContext context, ILogger<GenericRepository<Espacio>> logger)
             : base(context, logger)
         {
         }
+
     }
 }

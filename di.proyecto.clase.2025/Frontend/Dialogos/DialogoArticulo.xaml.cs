@@ -31,13 +31,34 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
             _mvArticulo = mvArticulo;
         }
 
-        
+        private async void diagArticulo_Loaded(object sender, RoutedEventArgs e)
+        {
+            await _mvArticulo.Inicializa();
+            DataContext = _mvArticulo;
+        }
+
+        private async void btnGuardarArticulo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _mvArticulo.GuardarArticuloAsync();
+                DialogResult = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar el modelo de artículo: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+        private void btnCancelarArticulo_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
 
 
-       
 
-       
 
-        
+
     }
 }
