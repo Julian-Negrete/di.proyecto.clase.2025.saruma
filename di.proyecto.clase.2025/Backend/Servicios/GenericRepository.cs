@@ -163,6 +163,10 @@ namespace di.proyecto.clase._2025.Backend.Servicios
             }
         }
 
+
+        
+
+
         /// <summary>
         /// Añade múltiples entidades y persiste los cambios en la base de datos.
         /// Las excepciones se registran y se relanzan.
