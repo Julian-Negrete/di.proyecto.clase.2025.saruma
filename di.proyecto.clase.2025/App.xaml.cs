@@ -68,8 +68,6 @@ namespace di.proyecto.clase._2025
             services.AddTransient<DialogoModeloArticulo>();
             services.AddTransient<DialogoArticulo>();
 
-
-
             services.AddTransient<MVArticulo>();
         }
 

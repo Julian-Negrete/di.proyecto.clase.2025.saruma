@@ -57,7 +57,7 @@
             Grid.Row="3"
             Margin="20,0,10,0"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            Text="{Binding modeloArticulo.Nombre}" />
+            Text="{Binding modeloArticulo.Nombre, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock
             Grid.Row="2"
@@ -72,7 +72,7 @@
             Grid.Column="1"
             Margin="20,0,10,0"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            Text="{Binding modeloArticulo.Marca}" />
+            Text="{Binding modeloArticulo.Marca, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock
             Grid.Row="4"
@@ -85,7 +85,7 @@
             Grid.Row="5"
             Margin="20,0,10,0"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-            Text="{Binding modeloArticulo.Modelo}" />
+            Text="{Binding modeloArticulo.Modelo, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock
             Grid.Row="4"
@@ -103,7 +103,7 @@
             ItemsSource="{Binding listaTiposArticulos}"
             SelectedItem="{Binding modeloarticulo.TipoNavigation}"
             Style="{StaticResource MaterialDesignOutlinedComboBox}"
-            Text="{Binding modeloArticulo.TipoNavigation}">
+            Text="{Binding modeloArticulo.TipoNavigation, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
             <!-- Aquí se pueden añadir los tipos de artículo como ComboBoxItems o enlazar a una colección
             <ComboBoxItem Content="Tipo 1"/>
             <ComboBoxItem Content="Tipo 2"/>

@@ -4,6 +4,7 @@ using di.proyecto.clase._2025.MVVM;
 using MahApps.Metro.Controls;
 using Microsoft.Extensions.Logging;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace di.proyecto.clase._2025.Frontend.Dialogos
 {
@@ -24,7 +25,9 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         private async void diagModeloArticulo_Loaded(object sender, RoutedEventArgs e)
         {
             await _mvArticulo.Inicializa();
+            this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(_mvArticulo.OnErrorEvent));
             DataContext = _mvArticulo;
+            
         }
 
         private async void btnGuardarModeloArticulo_Click(object sender, RoutedEventArgs e)

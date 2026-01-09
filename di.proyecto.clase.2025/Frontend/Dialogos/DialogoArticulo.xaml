@@ -67,7 +67,7 @@
                 Grid.Row="2"
                 Margin="20,0,10,0"
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                Text="{Binding articulo.Numserie}" />
+                Text="{Binding articulo.Numserie, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
 
             <TextBlock
                 Grid.Row="1"
@@ -81,7 +81,7 @@
                 Grid.Column="1"
                 Margin="20,0,10,0"
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                Text="{Binding articulo.Estado}" />
+                Text="{Binding articulo.Estado, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
 
             <TextBlock
                 Grid.Row="3"
@@ -94,7 +94,7 @@
                 Grid.Row="4"
                 Margin="20,0,10,0"
                 DisplayMemberPath="Nombre"
-                ItemsSource="{Binding listaModelosArticulos}"
+                ItemsSource="{Binding listaModelosArticulos, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
             <TextBlock
@@ -162,7 +162,7 @@
                 Margin="20,10,0,0"
                 mat:HintAssist.Hint="Selecciona un usuario"
                 DisplayMemberPath="Nombre"
-                ItemsSource="{Binding listaUsuarios}"
+                ItemsSource="{Binding listaUsuarios, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
             <TextBlock
@@ -179,7 +179,7 @@
                 Margin="20,10,0,0"
                 mat:HintAssist.Hint="Selecciona un departamento"
                 DisplayMemberPath="Nombre"
-                ItemsSource="{Binding listaDepartamentos}"
+                ItemsSource="{Binding listaDepartamentos, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
             <TextBlock
@@ -196,7 +196,7 @@
                 Margin="20,10,0,0"
                 mat:HintAssist.Hint="Selecciona un espacio"
                 DisplayMemberPath="Nombre"
-                ItemsSource="{Binding listaEspacios}"
+                ItemsSource="{Binding listaEspacios, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 Style="{StaticResource MaterialDesignOutlinedComboBox}" />
 
 

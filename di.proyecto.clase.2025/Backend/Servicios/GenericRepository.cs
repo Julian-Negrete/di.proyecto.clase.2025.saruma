@@ -123,7 +123,8 @@ namespace di.proyecto.clase._2025.Backend.Servicios
         /// <returns>Todas las entidades como lista.</returns>
         public async Task<List<T>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync().ConfigureAwait(false);
+            List<T> list = await _dbSet.ToListAsync().ConfigureAwait(false);
+            return list;
         }
 
         /// <summary>

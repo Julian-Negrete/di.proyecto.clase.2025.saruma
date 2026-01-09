@@ -83,11 +83,12 @@ namespace di.proyecto.clase._2025.MVVM
         {
             try
             {
+                _listaModelosArticulos = await GetAllAsync<Modeloarticulo>(_modeloArticuloRepository);
                 _listaTipoArticulos = await GetAllAsync<Tipoarticulo>(_tipoArticuloRepository);
                 _listaDepartamentos = await GetAllAsync<Departamento>(_departamentoRepository);
                 _listaUsuarios = await GetAllAsync<Usuario>(_usuarioRepository);
                 _listaEspacios = await GetAllAsync<Espacio>(_espacioRepository);
-                _listaModelosArticulos = await GetAllAsync<Modeloarticulo>(_modeloArticuloRepository);
+                
             }
             catch (Exception ex)
             {
@@ -127,7 +128,7 @@ namespace di.proyecto.clase._2025.MVVM
                 if (articulo.Idarticulo == 0)
                 {
                     // Nuevo modelo de artículo
-                    articulo.Idarticulo = 6000;
+                    articulo.Idarticulo = 0;
                     await _articuloRepository.AddAsync(articulo);
                 }
                 else
@@ -143,5 +144,6 @@ namespace di.proyecto.clase._2025.MVVM
             }
             return correcto;
         }
+
     }
 }

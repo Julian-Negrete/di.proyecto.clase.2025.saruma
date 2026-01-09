@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using di.proyecto.clase._2025.Frontend.MVVM.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace di.proyecto.clase._2025.Backend.Modelos;
@@ -13,10 +14,11 @@ namespace di.proyecto.clase._2025.Backend.Modelos;
 [Index("Modelo", Name = "fk_modelos_articulo_idx")]
 [Index("Usuarioalta", Name = "fk_usuarioalta_articulo_idx")]
 [Index("Usuariobaja", Name = "fk_usuariobaja_modeloarticulo_idx")]
-public partial class Articulo
+public partial class Articulo : ValidatableViewModel
 {
     [Key]
     [Column("idarticulo")]
+    [Required(ErrorMessage ="El Idarticulo es obligatorio")]
     public int Idarticulo { get; set; }
 
     [Column("numserie")]
@@ -79,6 +81,7 @@ public partial class Articulo
 
     [ForeignKey("Espacio")]
     [InverseProperty("Articulos")]
+    [Required(ErrorMessage ="El Espacio es obligatorio")]
     public virtual Espacio EspacioNavigation { get; set; } = null!;
 
     [InverseProperty("DentrodeNavigation")]
@@ -86,6 +89,7 @@ public partial class Articulo
 
     [ForeignKey("Modelo")]
     [InverseProperty("Articulos")]
+    [Required(ErrorMessage ="El Modelo es obligatorio")]
     public virtual Modeloarticulo ModeloNavigation { get; set; } = null!;
 
     [InverseProperty("ArticuloNavigation")]

@@ -14,9 +14,12 @@ namespace di.proyecto.clase._2025.Backend.Servicios
 {
     public class ArticuloRepository : GenericRepository<Articulo>
     {
+        
         public ArticuloRepository(DiinventarioexamenContext context, ILogger<GenericRepository<Articulo>> logger)
             : base(context, logger)
         {
+            
+        }
 
 
             /// <summary>
@@ -28,7 +31,7 @@ namespace di.proyecto.clase._2025.Backend.Servicios
             /// <param name="idSelector">Expresión que selecciona la propiedad id (ej: x => x.Idarticulo).</param>
             /// <param name="cancellationToken">Token de cancelación.</param>
             /// <returns>El valor máximo de la propiedad id. Si no hay registros devuelve default(TKey).</returns>
-        public async Task<int?> GetLastIdAsync<TKey>(Expression<Func<T, int>> idSelector, CancellationToken cancellationToken = default)
+        public async Task<int?> GetLastIdAsync<TKey>(Expression<Func<Articulo, int>> idSelector, CancellationToken cancellationToken = default)
         {
             if (idSelector == null) throw new ArgumentNullException(nameof(idSelector));
 
@@ -46,21 +49,33 @@ namespace di.proyecto.clase._2025.Backend.Servicios
             }
             catch (Exception ex)
             {
-               logger.LogError(ex,
-                    "Error al obtener el último id para el tipo {EntityType}",
-                    typeof(T).FullName);
-
                 throw new DataAccessException(
-                    $"Error al obtener el último id del tipo {typeof(T).FullName}", ex);
+                    $"Error al obtener el último id del tipo {typeof(Articulo).FullName}", ex);
             }
         }
 
+        public async Task<bool> EsNumSerieUnicoAsync(string? numserie, int? idArticuloActual = null)
+        {
+            if (string.IsNullOrWhiteSpace(numserie))
+                throw new ArgumentException("El número de serie no puede ser nulo o vacío.", nameof(numserie));
+
+            try
+            {
+                // Verifica si existe algún artículo con el mismo número de serie, excluyendo el artículo actual si se proporciona
+                return !await _dbSet.AsNoTracking()
+                    .AnyAsync(a => a.Numserie == numserie && (!idArticuloActual.HasValue || a.Idarticulo != idArticuloActual.Value));
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException("Error al comprobar la unicidad del número de serie.", ex);
+            }
+        }
 
     }
 
         
     }
 
-}
+
     
 

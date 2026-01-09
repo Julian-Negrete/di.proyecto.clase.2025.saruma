@@ -34,6 +34,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         private async void diagArticulo_Loaded(object sender, RoutedEventArgs e)
         {
             await _mvArticulo.Inicializa();
+            this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(_mvArticulo.OnErrorEvent));
             DataContext = _mvArticulo;
         }
 
@@ -41,6 +42,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         {
             try
             {
+
                 _mvArticulo.GuardarArticuloAsync();
                 DialogResult = true;
             }
