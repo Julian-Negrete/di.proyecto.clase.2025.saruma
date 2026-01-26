@@ -31,9 +31,15 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
             _mvArticulo = mvArticulo;
         }
 
-        private async void diagArticulo_Loaded(object sender, RoutedEventArgs e)
+        /*private async void diagArticulo_Loaded(object sender, RoutedEventArgs e)
         {
             await _mvArticulo.Inicializa();
+            this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(_mvArticulo.OnErrorEvent));
+            DataContext = _mvArticulo;
+        }*/
+        public async Task Inicializa(Articulo articulo) { 
+            await _mvArticulo.Inicializa();
+            _mvArticulo.articulo = articulo;
             this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(_mvArticulo.OnErrorEvent));
             DataContext = _mvArticulo;
         }
@@ -43,7 +49,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
             try
             {
 
-                _mvArticulo.GuardarArticuloAsync();
+                await _mvArticulo.GuardarArticuloAsync();
                 DialogResult = true;
             }
             catch (Exception ex)

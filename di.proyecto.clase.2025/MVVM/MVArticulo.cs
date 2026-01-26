@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace di.proyecto.clase._2025.MVVM
 {
@@ -42,12 +43,16 @@ namespace di.proyecto.clase._2025.MVVM
         private List<Departamento> _listaDepartamentos;
         private List<Espacio> _listaEspacios;
         private List<Modeloarticulo> _listaModelosArticulos;
+        private List<Articulo> _listaArticulos;
         #endregion
         #region Getters y Setters
         public List<Tipoarticulo> listaTiposArticulos => _listaTipoArticulos;
         public List<Usuario> listaUsuarios => _listaUsuarios;
         public List<Departamento> listaDepartamentos => _listaDepartamentos;
         public List<Espacio> listaEspacios => _listaEspacios;
+
+        public ListCollectionView listaArticulos { get; set; }
+
 
         public List<Modeloarticulo> listaModelosArticulos => _listaModelosArticulos;
 
@@ -75,7 +80,7 @@ namespace di.proyecto.clase._2025.MVVM
             _usuarioRepository = usuarioRepository;
             _departamentoRepository = departamentoRepository;
             _espacioRepository = espacioRepository;
-            _Articulo = new Articulo();
+            //_Articulo = new Articulo();
 
         }
 
@@ -88,7 +93,9 @@ namespace di.proyecto.clase._2025.MVVM
                 _listaDepartamentos = await GetAllAsync<Departamento>(_departamentoRepository);
                 _listaUsuarios = await GetAllAsync<Usuario>(_usuarioRepository);
                 _listaEspacios = await GetAllAsync<Espacio>(_espacioRepository);
-                
+                _listaArticulos = await GetAllAsync<Articulo>(_articuloRepository);
+                listaArticulos = new ListCollectionView(_listaArticulos);
+
             }
             catch (Exception ex)
             {
@@ -123,12 +130,20 @@ namespace di.proyecto.clase._2025.MVVM
         public async Task<bool> GuardarArticuloAsync()
         {
             bool correcto = true;
+            bool repiteNumSerie = await _articuloRepository.EsNumSerieUnicoAsync(articulo.Numserie);
+            if (repiteNumSerie)
+            {
+                MensajeError.Mostrar("GESTIÓN ARTÍCULOS", "El número de serie ya existe en otro artículo.\n" +
+                    "Por favor, introduce un número de serie único.", 0);
+                return false;
+            }
             try
             {
                 if (articulo.Idarticulo == 0)
                 {
                     // Nuevo modelo de artículo
-                    articulo.Idarticulo = 0;
+                    int? ultimoId = await _articuloRepository.GetLastIdAsync(a => a.Idarticulo);
+                    articulo.Idarticulo = (ultimoId ?? 0) + 1;
                     await _articuloRepository.AddAsync(articulo);
                 }
                 else

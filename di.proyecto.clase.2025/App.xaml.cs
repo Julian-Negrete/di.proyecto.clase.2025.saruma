@@ -65,6 +65,8 @@ namespace di.proyecto.clase._2025
             //Registramos las interfaces de usuario
             services.AddScoped<Login>();
             services.AddTransient<UCArticulos>();
+            services.AddTransient<UCListarModelos>();
+            services.AddTransient<UCListarArticulos>();
             services.AddTransient<DialogoModeloArticulo>();
             services.AddTransient<DialogoArticulo>();
 

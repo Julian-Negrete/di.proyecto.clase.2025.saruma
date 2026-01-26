@@ -18,7 +18,6 @@ public partial class Articulo : ValidatableViewModel
 {
     [Key]
     [Column("idarticulo")]
-    [Required(ErrorMessage ="El Idarticulo es obligatorio")]
     public int Idarticulo { get; set; }
 
     [Column("numserie")]

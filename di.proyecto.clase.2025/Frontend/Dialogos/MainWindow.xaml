@@ -1,15 +1,18 @@
-﻿<mah:MetroWindow x:Class="di.proyecto.clase._2025.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:di.proyecto.clase._2025"
-        mc:Ignorable="d"
-        WindowState="Maximized"
-        TitleBarHeight="40"
-        Title="MainWindow" Height="450" Width="800">
+﻿<mah:MetroWindow
+    x:Class="di.proyecto.clase._2025.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:di.proyecto.clase._2025"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    TitleBarHeight="40"
+    WindowState="Maximized"
+    mc:Ignorable="d">
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
@@ -31,11 +34,11 @@
             Grid.ColumnSpan="2"
             DisplayMode="CompactInline"
             Foreground="White"
+            ItemClick="hamMenuPrincipal_ItemClick"
             ItemTemplate="{StaticResource MenuItemTemplateImage}"
-            OptionsItemTemplate="{StaticResource MenuItemTemplateIcon}"
-            ItemClick="hamMenuPrincipal_ItemClick">
+            OptionsItemTemplate="{StaticResource MenuItemTemplateIcon}">
 
-            <!-- Poner tags a cada hamburger item-->
+            <!--  Poner tags a cada hamburger item  -->
             <mah:HamburgerMenu.ItemsSource>
                 <mah:HamburgerMenuItemCollection>
                     <mah:HamburgerMenuImageItem Label="Préstamos" ToolTip="Préstamos">
@@ -50,7 +53,10 @@
                         </mah:HamburgerMenuImageItem.Thumbnail>
                     </mah:HamburgerMenuImageItem>
 
-                    <mah:HamburgerMenuImageItem Label="Artículos" ToolTip="Artículos" Tag="Articulos">
+                    <mah:HamburgerMenuImageItem
+                        Label="Artículos"
+                        Tag="Articulos"
+                        ToolTip="Artículos">
                         <mah:HamburgerMenuImageItem.Thumbnail>
                             <BitmapImage UriSource="/Recursos/Iconos/articulo.png" />
                         </mah:HamburgerMenuImageItem.Thumbnail>

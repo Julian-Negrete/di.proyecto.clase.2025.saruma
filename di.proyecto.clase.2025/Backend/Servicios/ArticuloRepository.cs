@@ -22,16 +22,18 @@ namespace di.proyecto.clase._2025.Backend.Servicios
         }
 
 
-            /// <summary>
-            /// Devuelve el último valor de la propiedad id indicada para el tipo de entidad T.
-            /// Útil cuando la tabla no usa id autoincremental y necesitas calcular el siguiente id a partir del máximo actual.
-            /// Uso: await repo.GetLastIdAsync(x => x.Idmodeloarticulo);
-            /// </summary>
-            /// <typeparam name="TKey">Tipo de la propiedad id (por ejemplo int, long, string).</typeparam>
-            /// <param name="idSelector">Expresión que selecciona la propiedad id (ej: x => x.Idarticulo).</param>
-            /// <param name="cancellationToken">Token de cancelación.</param>
-            /// <returns>El valor máximo de la propiedad id. Si no hay registros devuelve default(TKey).</returns>
-        public async Task<int?> GetLastIdAsync<TKey>(Expression<Func<Articulo, int>> idSelector, CancellationToken cancellationToken = default)
+        /// <summary>
+        /// Devuelve el último valor de la propiedad id indicada para el tipo de entidad T.
+        /// Útil cuando la tabla no usa id autoincremental y necesitas calcular el siguiente id a partir del máximo actual.
+        /// Uso: await repo.GetLastIdAsync(x => x.Idmodeloarticulo);
+        /// </summary>
+        /// <typeparam name="TKey">Tipo de la propiedad id (por ejemplo int, long, string).</typeparam>
+        /// <param name="idSelector">Expresión que selecciona la propiedad id (ej: x => x.Idarticulo).</param>
+        /// <param name="cancellationToken">Token de cancelación.</param>
+        /// <returns>El valor máximo de la propiedad id. Si no hay registros devuelve default(TKey).</returns>
+        public async Task<int?> GetLastIdAsync(
+            Expression<Func<Articulo, int>> idSelector,
+            CancellationToken cancellationToken = default)
         {
             if (idSelector == null) throw new ArgumentNullException(nameof(idSelector));
 
@@ -54,27 +56,34 @@ namespace di.proyecto.clase._2025.Backend.Servicios
             }
         }
 
-        public async Task<bool> EsNumSerieUnicoAsync(string? numserie, int? idArticuloActual = null)
+        public async Task<bool> EsNumSerieUnicoAsync(string? numserie)
         {
+            
             if (string.IsNullOrWhiteSpace(numserie))
-                throw new ArgumentException("El número de serie no puede ser nulo o vacío.", nameof(numserie));
+                return false;
 
             try
             {
-                // Verifica si existe algún artículo con el mismo número de serie, excluyendo el artículo actual si se proporciona
-                return !await _dbSet.AsNoTracking()
-                    .AnyAsync(a => a.Numserie == numserie && (!idArticuloActual.HasValue || a.Idarticulo != idArticuloActual.Value));
+                bool existe = await _dbSet.AsNoTracking()
+                    .AnyAsync(a =>
+                        a.Numserie == numserie
+                    );
+
+                
+                return existe;
             }
             catch (Exception ex)
             {
-                throw new DataAccessException("Error al comprobar la unicidad del número de serie.", ex);
+                throw new DataAccessException(
+                    "Error al comprobar la unicidad del número de serie.", ex);
             }
         }
 
+
     }
 
-        
-    }
+
+}
 
 
     
