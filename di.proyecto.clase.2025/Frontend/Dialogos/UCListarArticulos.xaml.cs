@@ -52,6 +52,11 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         {
             _mvArticulo.Filtrar();
         }
+
+        private void Limpiarfiltros_Click(object sender, RoutedEventArgs e)
+        {
+            _mvArticulo.LimpiarFiltro();
+        }
     }
 
 

@@ -54,6 +54,7 @@
                         SelectedItem="{Binding modeloArticuloSeleccionado}"
                         SelectionChanged="cbModelos_SelectionChanged"
                         Style="{StaticResource MahApps.Styles.ComboBox}" />
+                    <Button x:Name="Limpiarfiltros" Click="Limpiarfiltros_Click" />
 
                 </StackPanel>
             </Grid>
@@ -97,7 +98,7 @@
 
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <DatePicker SelectedDate="{Binding Fechaalta}" />
+                                <DatePicker IsEnabled="False" SelectedDate="{Binding Fechaalta}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -193,7 +194,7 @@
                                     Text="Listado de prestamos del articulo" />
                             </Grid>
                             <Grid>
-                                <ListBox ItemsSource="{Binding Salida}" />
+                                <ListBox ItemsSource="{Binding ModeloNavigation}" />
                             </Grid>
                         </DockPanel>
 

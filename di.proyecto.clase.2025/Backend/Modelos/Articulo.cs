@@ -101,4 +101,9 @@ public partial class Articulo : ValidatableViewModel
     [ForeignKey("Usuariobaja")]
     [InverseProperty("ArticuloUsuariobajaNavigations")]
     public virtual Usuario? UsuariobajaNavigation { get; set; }
+
+    override public string ToString()
+    {
+        return $"{ModeloNavigation?.Nombre} - {Numserie}";
+    }
 }

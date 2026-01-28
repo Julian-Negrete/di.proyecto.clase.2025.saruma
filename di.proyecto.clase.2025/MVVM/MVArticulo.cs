@@ -146,6 +146,12 @@ namespace di.proyecto.clase._2025.MVVM
             AddCriterios();
             listaArticulosFiltro.Filter = predicadorFiltro;
         }
+        public void LimpiarFiltro()
+        {
+            modeloArticuloSeleccionado = null;
+            //articulo.Usuarioalta = null;
+            listaArticulosFiltro.Filter = null;
+        }
         public async Task<bool> GuardarArticuloAsync()
         {
             bool correcto = true;
