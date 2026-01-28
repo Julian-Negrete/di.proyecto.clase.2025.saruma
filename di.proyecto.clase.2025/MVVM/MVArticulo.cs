@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace di.proyecto.clase._2025.MVVM
@@ -44,6 +45,10 @@ namespace di.proyecto.clase._2025.MVVM
         private List<Espacio> _listaEspacios;
         private List<Modeloarticulo> _listaModelosArticulos;
         private List<Articulo> _listaArticulos;
+        private List<Predicate<Articulo>> criteriosArticulos;
+        private Predicate<Articulo> criterioModelo;
+        private Predicate<Articulo> criterioUsuarioAlta;
+
         #endregion
         #region Getters y Setters
         public List<Tipoarticulo> listaTiposArticulos => _listaTipoArticulos;
@@ -67,6 +72,14 @@ namespace di.proyecto.clase._2025.MVVM
             get => _Articulo;
             set => SetProperty(ref _Articulo, value);
         }
+        public Modeloarticulo modeloArticuloSeleccionado
+        {
+            get => _modeloArticulo;
+            set => SetProperty(ref _modeloArticulo, value);
+        }
+        public ListCollectionView listaArticulosFiltro => listaArticulos;
+        public Predicate<object> predicadorFiltro;
+
         #endregion
         // Aquí puedes añadir propiedades y métodos específicos para el ViewModel de Artículo
         public MVArticulo(ModeloArticuloRepository modeloArticuloRepository, TipoArticuloRepository tipoArticuloRepository, ArticuloRepository articuloRepository, UsuarioRepository usuarioRepository, DepartamentoRepository departamentoRepository, EspacioRepository espacioRepository)
@@ -74,6 +87,8 @@ namespace di.proyecto.clase._2025.MVVM
             _modeloArticuloRepository = modeloArticuloRepository;
             _tipoArticuloRepository = tipoArticuloRepository;
             _modeloArticulo = new Modeloarticulo();
+            modeloArticuloSeleccionado = new Modeloarticulo();
+
 
 
             _articuloRepository = articuloRepository;
@@ -88,13 +103,11 @@ namespace di.proyecto.clase._2025.MVVM
         {
             try
             {
-                _listaModelosArticulos = await GetAllAsync<Modeloarticulo>(_modeloArticuloRepository);
-                _listaTipoArticulos = await GetAllAsync<Tipoarticulo>(_tipoArticuloRepository);
-                _listaDepartamentos = await GetAllAsync<Departamento>(_departamentoRepository);
-                _listaUsuarios = await GetAllAsync<Usuario>(_usuarioRepository);
-                _listaEspacios = await GetAllAsync<Espacio>(_espacioRepository);
-                _listaArticulos = await GetAllAsync<Articulo>(_articuloRepository);
-                listaArticulos = new ListCollectionView(_listaArticulos);
+
+                await InicializaListas();
+                InicializaFiltros();
+
+                predicadorFiltro = new Predicate<object>(FiltroCriterios);
 
             }
             catch (Exception ex)
@@ -126,6 +139,12 @@ namespace di.proyecto.clase._2025.MVVM
                 correcto = false;
             }
             return correcto;
+        }
+
+        public void Filtrar()
+        {
+            AddCriterios();
+            listaArticulosFiltro.Filter = predicadorFiltro;
         }
         public async Task<bool> GuardarArticuloAsync()
         {
@@ -159,6 +178,47 @@ namespace di.proyecto.clase._2025.MVVM
             }
             return correcto;
         }
+
+        #region Metodos privados
+        private void InicializaFiltros()
+        {
+            criterioModelo = new Predicate<Articulo>(a => a.ModeloNavigation != null && a.ModeloNavigation.Equals(modeloArticuloSeleccionado));
+            //criterioUsuarioAlta = new Predicate<Articulo>(a => a.Usuarioalta != null && a.Usuarioalta.Equals(articulo.Usuarioalta));
+        }
+
+        private async Task InicializaListas()
+        {
+            _listaModelosArticulos = await GetAllAsync<Modeloarticulo>(_modeloArticuloRepository);
+            _listaTipoArticulos = await GetAllAsync<Tipoarticulo>(_tipoArticuloRepository);
+            _listaDepartamentos = await GetAllAsync<Departamento>(_departamentoRepository);
+            _listaUsuarios = await GetAllAsync<Usuario>(_usuarioRepository);
+            _listaEspacios = await GetAllAsync<Espacio>(_espacioRepository);
+            _listaArticulos = await GetAllAsync<Articulo>(_articuloRepository);
+            listaArticulos = new ListCollectionView(_listaArticulos.ToList());
+            criteriosArticulos = new List<Predicate<Articulo>>();
+        }
+
+        private void AddCriterios()
+        {
+            criteriosArticulos.Clear();
+            if (modeloArticuloSeleccionado != null) { criteriosArticulos.Add(criterioModelo); }
+            //if (articulo.Usuarioalta != null) { criteriosArticulos.Add(criterioUsuarioAlta); }
+
+        }
+
+        private bool FiltroCriterios(object item)
+        {
+            bool correcto = true;
+            Articulo articulo = (Articulo)item;
+            if (criteriosArticulos != null)
+            {
+                correcto = criteriosArticulos.TrueForAll(x => x(articulo));
+            }
+            return correcto;
+        }
+
+
+        #endregion
 
     }
 }

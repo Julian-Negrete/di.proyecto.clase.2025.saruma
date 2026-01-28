@@ -14,12 +14,50 @@
 
     <DockPanel>
         <Grid DockPanel.Dock="Top">
-            <TextBlock
-                Margin="10"
-                HorizontalAlignment="Center"
-                FontSize="25"
-                FontWeight="Bold"
-                Text="LISTA DE ARTÍCULOS" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    FontSize="25"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Text="LISTA DE ARTÍCULOS" />
+                <StackPanel
+                    Grid.Row="1"
+                    Margin="0,0,0,5"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Style="{StaticResource MahApps.Styles.TextBlock}"
+                        Text="Filtros" />
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Style="{StaticResource MahApps.Styles.TextBlock}"
+                        Text="Por modelo" />
+                    <ComboBox
+                        Name="cbModelos"
+                        Width="150"
+                        Margin="5,0,0,0"
+                        DisplayMemberPath="Nombre"
+                        ItemsSource="{Binding listaModelosArticulos}"
+                        SelectedItem="{Binding modeloArticuloSeleccionado}"
+                        SelectionChanged="cbModelos_SelectionChanged"
+                        Style="{StaticResource MahApps.Styles.ComboBox}" />
+
+                </StackPanel>
+            </Grid>
+
 
         </Grid>
         <Grid>

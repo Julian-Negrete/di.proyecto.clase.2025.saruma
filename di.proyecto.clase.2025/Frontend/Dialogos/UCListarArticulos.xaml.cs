@@ -47,6 +47,11 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
                 _mvArticulo.listaArticulos.Refresh();
             }
         }
+
+        private void cbModelos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _mvArticulo.Filtrar();
+        }
     }
 
 
