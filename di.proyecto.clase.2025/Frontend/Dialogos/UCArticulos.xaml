@@ -24,7 +24,7 @@
                     x:Name="btnListaArticulos"
                     Click="btnListarArticulos_Click"
                     ToolTip="Agregar ModeloArticulo">
-                    
+
                     <mat:PackIcon Kind="ListBox" />
 
                 </Button>

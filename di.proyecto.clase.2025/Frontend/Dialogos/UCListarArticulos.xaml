@@ -54,7 +54,27 @@
                         SelectedItem="{Binding modeloArticuloSeleccionado}"
                         SelectionChanged="cbModelos_SelectionChanged"
                         Style="{StaticResource MahApps.Styles.ComboBox}" />
-                    <Button x:Name="Limpiarfiltros" Click="Limpiarfiltros_Click" />
+                    <Button x:Name="Limpiarfiltros" Click="Limpiarfiltros_Click">
+                        <Image Source="/Recursos/Iconos/matisse.png" />
+                    </Button>
+
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Style="{StaticResource MahApps.Styles.TextBlock}"
+                        Text="Por espacio" />
+                    <ComboBox
+                        Name="cbEspacios"
+                        Width="150"
+                        Margin="5,0,0,0"
+                        DisplayMemberPath="Nombre"
+                        ItemsSource="{Binding listaEspacios}"
+                        SelectedItem="{Binding espacioArticuloSeleccionado}"
+                        SelectionChanged="cbEspacios_SelectionChanged"
+                        Style="{StaticResource MahApps.Styles.ComboBox}" />
 
                 </StackPanel>
             </Grid>

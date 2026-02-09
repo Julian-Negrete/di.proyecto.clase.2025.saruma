@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System.Configuration;
 using System.Data;
 using System.Windows;
+using System.Windows.Input;
 
 namespace di.proyecto.clase._2025
 {
@@ -69,8 +70,11 @@ namespace di.proyecto.clase._2025
             services.AddTransient<UCListarArticulos>();
             services.AddTransient<DialogoModeloArticulo>();
             services.AddTransient<DialogoArticulo>();
+            services.AddTransient<UCAdministracion>();
+            services.AddTransient<UCArbolEspacios>();
 
             services.AddTransient<MVArticulo>();
+            services.AddTransient<MVEspacio>();
         }
 
         protected override void OnStartup(StartupEventArgs e)

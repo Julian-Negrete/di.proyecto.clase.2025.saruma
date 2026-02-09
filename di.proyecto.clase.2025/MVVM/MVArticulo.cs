@@ -24,11 +24,13 @@ namespace di.proyecto.clase._2025.MVVM
         /// </summary>
         private Modeloarticulo _modeloArticulo;
         private Articulo _Articulo;
+        private Espacio _espacioArticulo;
         /// <summary>
         /// Repositorio para gestionar las operaciones de datos relacionadas con los modelos de artículo
         /// </summary>
         private ModeloArticuloRepository _modeloArticuloRepository;
         private ArticuloRepository _articuloRepository;
+
         /// <summary>
         /// Repositorio para gestionar las operaciones de datos relacionadas con los tipos de artículo
         /// </summary>
@@ -47,6 +49,7 @@ namespace di.proyecto.clase._2025.MVVM
         private List<Articulo> _listaArticulos;
         private List<Predicate<Articulo>> criteriosArticulos;
         private Predicate<Articulo> criterioModelo;
+        private Predicate<Articulo> criterioEspacio;
         private Predicate<Articulo> criterioUsuarioAlta;
 
         #endregion
@@ -57,7 +60,6 @@ namespace di.proyecto.clase._2025.MVVM
         public List<Espacio> listaEspacios => _listaEspacios;
 
         public ListCollectionView listaArticulos { get; set; }
-
 
         public List<Modeloarticulo> listaModelosArticulos => _listaModelosArticulos;
 
@@ -77,6 +79,9 @@ namespace di.proyecto.clase._2025.MVVM
             get => _modeloArticulo;
             set => SetProperty(ref _modeloArticulo, value);
         }
+        public Espacio espacioArticuloSeleccionado { 
+            get=>_espacioArticulo; 
+            set=> SetProperty(ref _espacioArticulo, value); }
         public ListCollectionView listaArticulosFiltro => listaArticulos;
         public Predicate<object> predicadorFiltro;
 
@@ -87,9 +92,6 @@ namespace di.proyecto.clase._2025.MVVM
             _modeloArticuloRepository = modeloArticuloRepository;
             _tipoArticuloRepository = tipoArticuloRepository;
             _modeloArticulo = new Modeloarticulo();
-            modeloArticuloSeleccionado = new Modeloarticulo();
-
-
 
             _articuloRepository = articuloRepository;
             _usuarioRepository = usuarioRepository;
@@ -148,7 +150,9 @@ namespace di.proyecto.clase._2025.MVVM
         }
         public void LimpiarFiltro()
         {
+
             modeloArticuloSeleccionado = null;
+            espacioArticuloSeleccionado = null;
             //articulo.Usuarioalta = null;
             listaArticulosFiltro.Filter = null;
         }
@@ -190,6 +194,7 @@ namespace di.proyecto.clase._2025.MVVM
         {
             criterioModelo = new Predicate<Articulo>(a => a.ModeloNavigation != null && a.ModeloNavigation.Equals(modeloArticuloSeleccionado));
             //criterioUsuarioAlta = new Predicate<Articulo>(a => a.Usuarioalta != null && a.Usuarioalta.Equals(articulo.Usuarioalta));
+            criterioEspacio = new Predicate<Articulo>(a => a.EspacioNavigation != null && a.EspacioNavigation.Equals(espacioArticuloSeleccionado));
         }
 
         private async Task InicializaListas()
@@ -209,16 +214,17 @@ namespace di.proyecto.clase._2025.MVVM
             criteriosArticulos.Clear();
             if (modeloArticuloSeleccionado != null) { criteriosArticulos.Add(criterioModelo); }
             //if (articulo.Usuarioalta != null) { criteriosArticulos.Add(criterioUsuarioAlta); }
+            if (espacioArticuloSeleccionado != null) { criteriosArticulos.Add(criterioEspacio); }
 
         }
 
         private bool FiltroCriterios(object item)
         {
             bool correcto = true;
-            Articulo articulo = (Articulo)item;
+            Articulo art = (Articulo)item;
             if (criteriosArticulos != null)
             {
-                correcto = criteriosArticulos.TrueForAll(x => x(articulo));
+                correcto = criteriosArticulos.TrueForAll(x => x(art));
             }
             return correcto;
         }
