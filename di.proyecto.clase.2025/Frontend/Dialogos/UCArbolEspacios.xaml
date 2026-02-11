@@ -8,8 +8,8 @@
     xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="ucArbolEspacios"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="650"
+    d:DesignWidth="1200"
     Loaded="ucArbolEspacios_Loaded"
     mc:Ignorable="d">
 
@@ -23,7 +23,10 @@
                 Text="Administración de espacios" />
         </Grid>
         <Grid DockPanel.Dock="Left">
-            <TreeView x:Name="treeEspacios" ItemsSource="{Binding Espacios}">
+            <TreeView
+                x:Name="treeEspacios"
+                ItemsSource="{Binding Espacios}"
+                SelectedItemChanged="treeEspacios_SelectedItemChanged">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type ent:Espacio}" ItemsSource="{Binding Articulos}">
                         <StackPanel Orientation="Horizontal">
@@ -60,6 +63,129 @@
                 </TreeView.Resources>
             </TreeView>
         </Grid>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.ColumnSpan="3"
+                Margin="20"
+                FontSize="16"
+                Foreground="DarkViolet"
+                Text="MODIFICA LAS PROPIEDADES DEL ARTICULO" />
+            <TextBox
+                Grid.Row="1"
+                Margin="20,0,20,0"
+                mat:HintAssist.Hint="Número de serie"
+                Foreground="#444"
+                Text="{Binding ArticuloSeleccionado.Numserie}" />
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="20"
+                FontSize="16"
+                Foreground="#444"
+                Text="{Binding ArticuloSeleccionado.Observaciones}" />
+            <DatePicker
+                Grid.Row="2"
+                Grid.Column="3"
+                Margin="20,0,20,0"
+                Foreground="#444"
+                SelectedDate="{Binding ArticuloSeleccionado.Fechaalta}" />
+            <ComboBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="20"
+                mat:HintAssist.Hint="Estado del artículo"
+                DisplayMemberPath="Nombre"
+                Foreground="#444"
+                ItemsSource="{Binding ListaEstado}"
+                SelectedItem="{Binding ArticuloSeleccionado.Estado}" />
+            <ComboBox
+                Name="cbDepartamento"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="150"
+                Margin="20,0,20,0"
+                mat:HintAssist.Hint="Departamento del artículo"
+                DisplayMemberPath="Nombre"
+                Foreground="#444"
+                ItemsSource="{Binding ListaDepartamentos}"
+                SelectedItem="{Binding ArticuloSeleccionado.DepartamentoNavigation}" />
+            <ComboBox
+                Name="cbEspacio"
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="150"
+                Margin="20,0,20,0"
+                mat:HintAssist.Hint="Espacio del artículo"
+                DisplayMemberPath="Nombre"
+                Foreground="#444"
+                ItemsSource="{Binding Espacios}"
+                SelectedItem="{Binding ArticuloSeleccionado.EspacioNavigation}" />
+            <ComboBox
+                Name="cbUsuario"
+                Grid.Row="1"
+                Grid.Column="3"
+                Width="150"
+                Margin="20,0,20,0"
+                mat:HintAssist.Hint="Usuario del artículo"
+                DisplayMemberPath="Nombre"
+                Foreground="#444"
+                ItemsSource="{Binding ListaUsuarios}"
+                SelectedItem="{Binding ArticuloSeleccionado.UsuarioaltaNavigation}" />
 
+            <ComboBox
+                Name="cbModelo"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="20"
+                mat:HintAssist.Hint="Modelo del artículo"
+                DisplayMemberPath="Nombre"
+                Foreground="#444"
+                ItemsSource="{Binding ListaModelosArticulos}"
+                SelectedItem="{Binding ArticuloSeleccionado.ModeloNavigation}" />
+            <Button
+                x:Name="btnModificarArticulo"
+                Grid.Row="2"
+                Grid.Column="4"
+                Content="Modificar" />
+
+
+        </Grid>
+        <Grid x:Name="panelCentral">
+            <DataGrid
+                x:Name="dgArticulosPorEspacio"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                ColumnWidth="*"
+                SelectedItem="{Binding ArticuloSeleccionado}"
+                Style="{StaticResource MahApps.Styles.DataGrid}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Numserie}" Header="Número de Serie" />
+                    <DataGridTextColumn Binding="{Binding ModeloNavigation}" Header="Modelo del artículo" />
+                    <DataGridTextColumn Binding="{Binding UsuarioaltaNavigation.Nombre}" Header="Usuario" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding Fechaalta}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </DockPanel>
 </UserControl>

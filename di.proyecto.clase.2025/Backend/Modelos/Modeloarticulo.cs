@@ -49,4 +49,9 @@ public partial class Modeloarticulo : ValidatableViewModel
     [InverseProperty("Modeloarticulos")]
     [Required(ErrorMessage ="El Tipo es obligatorio")]
     public virtual Tipoarticulo? TipoNavigation { get; set; }
+
+    public override string ToString()
+    {
+        return $"{Nombre}";
+    }
 }

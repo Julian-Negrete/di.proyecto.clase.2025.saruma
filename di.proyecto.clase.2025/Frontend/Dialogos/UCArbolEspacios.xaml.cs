@@ -1,4 +1,5 @@
-﻿using di.proyecto.clase._2025.MVVM;
+﻿using di.proyecto.clase._2025.Backend.Modelos;
+using di.proyecto.clase._2025.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,5 +35,15 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
             await _mvEspacio.Inicializa();
             DataContext = _mvEspacio;
         }
+
+        private void treeEspacios_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (treeEspacios.SelectedItem is Espacio) 
+            { 
+                dgArticulosPorEspacio.ItemsSource = ((Espacio)treeEspacios.SelectedItem).Articulos;
+            }
+        }
+
+        
     }
 }

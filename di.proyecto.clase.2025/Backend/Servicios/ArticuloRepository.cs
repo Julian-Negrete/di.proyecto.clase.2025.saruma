@@ -56,6 +56,24 @@ namespace di.proyecto.clase._2025.Backend.Servicios
             }
         }
 
+        public async Task<String> GetEstado() {
+            try
+            {
+                var estados = await _dbSet
+                    .AsNoTracking()
+                    .Select(a => a.Estado)
+                    .Where(e => !string.IsNullOrEmpty(e))
+                    .Distinct()
+                    .ToListAsync();
+                return string.Join(", ", estados);
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(
+                    "Error al obtener los estados de los artículos.", ex);
+            }
+        }
+
         public async Task<bool> EsNumSerieUnicoAsync(string? numserie)
         {
             
