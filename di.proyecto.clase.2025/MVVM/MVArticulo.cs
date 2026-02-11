@@ -159,17 +159,20 @@ namespace di.proyecto.clase._2025.MVVM
         public async Task<bool> GuardarArticuloAsync()
         {
             bool correcto = true;
-            bool repiteNumSerie = await _articuloRepository.EsNumSerieUnicoAsync(articulo.Numserie);
-            if (repiteNumSerie)
-            {
-                MensajeError.Mostrar("GESTIÓN ARTÍCULOS", "El número de serie ya existe en otro artículo.\n" +
-                    "Por favor, introduce un número de serie único.", 0);
-                return false;
-            }
+            
             try
             {
                 if (articulo.Idarticulo == 0)
                 {
+
+                    bool repiteNumSerie = await _articuloRepository.EsNumSerieUnicoAsync(articulo.Numserie);
+                    if (repiteNumSerie)
+                    {
+                        MensajeError.Mostrar("GESTIÓN ARTÍCULOS", "El número de serie ya existe en otro artículo.\n" +
+                            "Por favor, introduce un número de serie único.", 0);
+                        return false;
+                    }
+
                     // Nuevo modelo de artículo
                     int? ultimoId = await _articuloRepository.GetLastIdAsync(a => a.Idarticulo);
                     articulo.Idarticulo = (ultimoId ?? 0) + 1;

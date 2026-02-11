@@ -1,6 +1,7 @@
 ﻿using di.proyecto.clase._2025.Backend.Modelos;
 using di.proyecto.clase._2025.MVVM;
 using System;
+using MahApps.Metro.Controls;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,6 +45,17 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
             }
         }
 
-        
+        private async void btnModificarArticulo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                await _mvEspacio.GuardarArticuloAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar el modelo de artículo: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

@@ -56,6 +56,7 @@ namespace di.proyecto.clase._2025
             services.AddScoped<IGenericRepository<Usuario>, UsuarioRepository>();
             services.AddScoped<IGenericRepository<Departamento>, DepartamentoRepository>();
             services.AddScoped<IGenericRepository<Espacio>, EspacioRepository>();
+            services.AddTransient(typeof(GenericRepository<>));
             // Registramos los servicios específicos
             services.AddScoped<UsuarioRepository>();
             services.AddScoped<ArticuloRepository>();
@@ -68,13 +69,16 @@ namespace di.proyecto.clase._2025
             services.AddTransient<UCArticulos>();
             services.AddTransient<UCListarModelos>();
             services.AddTransient<UCListarArticulos>();
+            services.AddTransient<UCListaUsuarios>();
             services.AddTransient<DialogoModeloArticulo>();
             services.AddTransient<DialogoArticulo>();
             services.AddTransient<UCAdministracion>();
             services.AddTransient<UCArbolEspacios>();
+            services.AddTransient<UCUsuario>();
 
             services.AddTransient<MVArticulo>();
             services.AddTransient<MVEspacio>();
+            services.AddTransient<MVUsuario>();
         }
 
         protected override void OnStartup(StartupEventArgs e)

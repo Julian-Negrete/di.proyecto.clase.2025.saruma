@@ -41,6 +41,16 @@
             <!--  Poner tags a cada hamburger item  -->
             <mah:HamburgerMenu.ItemsSource>
                 <mah:HamburgerMenuItemCollection>
+
+                    <mah:HamburgerMenuImageItem
+                        Label="Usuarios"
+                        Tag="Usuarios"
+                        ToolTip="Usuarios">
+                        <mah:HamburgerMenuImageItem.Thumbnail>
+                            <BitmapImage UriSource="/Recursos/Iconos/matisse.png" />
+                        </mah:HamburgerMenuImageItem.Thumbnail>
+                    </mah:HamburgerMenuImageItem>
+
                     <mah:HamburgerMenuImageItem Label="Préstamos" ToolTip="Préstamos">
                         <mah:HamburgerMenuImageItem.Thumbnail>
                             <BitmapImage UriSource="/Recursos/Iconos/prestamos.png" />

@@ -1,0 +1,119 @@
+﻿<UserControl
+    x:Class="di.proyecto.clase._2025.Frontend.Dialogos.UCListaUsuarios"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Loaded="ListarUsuarios_Loaded"
+    mc:Ignorable="d">
+    <DockPanel>
+        <Grid x:Name="panelCentral">
+            <DataGrid
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                ColumnWidth="*"
+                IsReadOnly="True"
+                ItemsSource="{Binding ListaUsuarios}"
+                SelectedItem="{Binding Usuario}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Idusuario}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="BarcodeScan" />
+                                <TextBlock FontWeight="Bold" Text="Id usuario" />
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Binding="{Binding Username}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="StateMachine" />
+                                <TextBlock FontWeight="Bold" Text="Nombre usuario" />
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+
+
+                    <DataGridTextColumn Binding="{Binding RolNavigation.Nombre}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="Account" />
+                                <TextBlock Text="Rol" />
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+
+                    <DataGridTextColumn Binding="{Binding Nombre}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="BoxUp" />
+                                <TextBlock Text="Nombre" />
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Binding="{Binding Apellido1}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="AlphaEBox" />
+                                <TextBlock Text="Apellido" />
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Binding="{Binding Email}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="AlphaEBox" />
+                                <TextBlock Text="Email" />
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+
+
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem
+                            x:Name="editarUsuarioContexto"
+                            Click="editarUsuarioContexto_Click"
+                            Header="Editar">
+                            <MenuItem.Icon>
+                                <Image
+                                    Width="16"
+                                    Height="16"
+                                    Source="/Recursos/Iconos/prestamos.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+
+                        <DockPanel>
+                            <Grid Margin="0,0,0,5" DockPanel.Dock="Top">
+                                <TextBlock
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Text="Listado de usuarios" />
+                            </Grid>
+
+                        </DockPanel>
+
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+
+            </DataGrid>
+        </Grid>
+
+    </DockPanel>
+</UserControl>

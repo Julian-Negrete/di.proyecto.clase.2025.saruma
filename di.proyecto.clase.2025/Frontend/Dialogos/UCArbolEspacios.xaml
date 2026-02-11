@@ -87,6 +87,7 @@
                 Text="MODIFICA LAS PROPIEDADES DEL ARTICULO" />
             <TextBox
                 Grid.Row="1"
+                Width="150"
                 Margin="20,0,20,0"
                 mat:HintAssist.Hint="Número de serie"
                 Foreground="#444"
@@ -94,6 +95,7 @@
             <TextBox
                 Grid.Row="2"
                 Grid.Column="0"
+                Width="150"
                 Margin="20"
                 FontSize="16"
                 Foreground="#444"
@@ -101,15 +103,16 @@
             <DatePicker
                 Grid.Row="2"
                 Grid.Column="3"
+                Width="150"
                 Margin="20,0,20,0"
                 Foreground="#444"
                 SelectedDate="{Binding ArticuloSeleccionado.Fechaalta}" />
             <ComboBox
                 Grid.Row="2"
                 Grid.Column="1"
+                Width="150"
                 Margin="20"
                 mat:HintAssist.Hint="Estado del artículo"
-                DisplayMemberPath="Nombre"
                 Foreground="#444"
                 ItemsSource="{Binding ListaEstado}"
                 SelectedItem="{Binding ArticuloSeleccionado.Estado}" />
@@ -151,6 +154,7 @@
                 Name="cbModelo"
                 Grid.Row="1"
                 Grid.Column="2"
+                Width="150"
                 Margin="20"
                 mat:HintAssist.Hint="Modelo del artículo"
                 DisplayMemberPath="Nombre"
@@ -161,6 +165,7 @@
                 x:Name="btnModificarArticulo"
                 Grid.Row="2"
                 Grid.Column="4"
+                Click="btnModificarArticulo_Click"
                 Content="Modificar" />
 
 
